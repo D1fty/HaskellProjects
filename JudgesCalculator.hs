@@ -5,6 +5,7 @@ import Data.Char
 -- Main
 -- This program reads in a number of judges and a score for each judge
 -- It then outputs the following: Largest Score, Lowest Score and the Score Average
+-- It is not a great program for Haskell because most of the work is IO
 main :: IO ()
 main = do system "cls"
           putStrLn "--------------------------------------------------------------"
@@ -13,7 +14,6 @@ main = do system "cls"
           putStrLn "Enter the number of judges: "
           input    <- getLine
           putStrLn ""
-          putStrLn "Enter a score for each judge: "
           scores   <- getScores (read input :: Int)
           putStrLn ""
           showScores  scores    (read input :: Int)
@@ -21,7 +21,8 @@ main = do system "cls"
 -- Get the scores
 getScores :: Int -> IO [Float]
 getScores 0 = return []
-getScores x = do input <- getLine
+getScores x = do z     <- putStrLn ("Enter a score for each judge " ++ show x ++ ": ")
+                 input <- getLine
                  y     <- getScores (x-1)
                  return ((read input :: Float) : y)
 
@@ -40,7 +41,7 @@ showScores list x = do putStr "Highest score: "
 removeValues :: [Float] -> [Float]
 removeValues list = removeValue (removeValue  list (minimum list)) (maximum list)
 
--- Remove one occurance from a value in the list
+-- Remove one occurance of a value from the list
 removeValue :: [Float] -> Float -> [Float]
 removeValue [] _ = []
 removeValue (h:t) x
