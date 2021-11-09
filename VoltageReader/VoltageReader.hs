@@ -9,13 +9,12 @@ data Threshholds = Threshholds {
 
 -- Errors data type
 data Error = 
-  TypeOne Int Float Float | TypeTwo Int Int Float | TypeThree | TypeFour
+  TypeOne Int Float Float | TypeTwo Int Int Float | TypeThree
 
 showError :: Error -> String
 showError (TypeOne v1 v2 v3) = "Voltage at hour " ++ show v1 ++ " was " ++ show v2 ++ " (difference of " ++ show v3 ++ ")"
-showError (TypeTwo v1 v2 v3) = "Voltage change from hour " ++ show v1 ++ "to hour " ++ show v2 ++ " was " ++ show v3
+showError (TypeTwo v1 v2 v3) = "Voltage change from hour " ++ show v1 ++ " to hour " ++ show v2 ++ " was " ++ show v3
 showError TypeThree          = "No input voltages"
-showError TypeFour           = "Only one input voltage"
 
 -- Main
 -- This program reads in a list of voltages and error checks the readings
